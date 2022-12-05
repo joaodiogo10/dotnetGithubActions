@@ -1,28 +1,24 @@
 name: Deploy
 
 on:
-	push:
-		branches: [ main ]
-	pull_request:
-		branches: [ main ]
-
+  push:
+    branches: [main]
+  pull_request:
+  :
+    branches: [main]
 jobs:
-	build:
+  build:
+    runs-on: windows-2019
 
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
 
-	runs-on: windows-2019
+    - name: Restore Packages
+      run: nuget restore MySolution.sln
 
-	steps:
-		- uses: actions/checkout@v2
-
-		- name: Setup NuGet
-		  uses: NuGet/setup-nuget@v1.0.5
-  
-		- name: setup-msbuild
-		  uses: microsoft/setup-msbuild@v1.1
-
-		- name: Restore Packages
-		  run: nuget restore MySolution.sln
-
-		- name: Build solution
-		  run: msbuild GithubActionsDemo.sln -t:rebuild -property:Configuration=Release
+    - name: Build Solution
+      run: |
+        msbuild.exe MySolution.sln  -t:rebuild -property:Configuration=Release
