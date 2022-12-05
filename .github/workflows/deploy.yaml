@@ -21,4 +21,4 @@ jobs:
 
     - name: Build Solution
       run: |
-        msbuild.exe GithubActionsDemo.sln  -t:rebuild -property:Configuration=Release
+        msbuild.exe GithubActionsDemo.sln  -t:rebuild -p:Configuration=Release -p:platform="x64"
