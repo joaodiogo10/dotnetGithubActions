@@ -8,13 +8,16 @@ on:
 
 jobs:
   upload:
-    - name: Create directory
-      run: mkdir tmp 
+    runs-on: windows-2019
 
-    - name: Upload to mega
-      uses: Difegue/action-megacmd@master
-      with:
-        args: put tmp Test
-      env:
-        USERNAME: ${{ secrets.MEGA_USERNAME }}
-        PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+    steps:
+      - name: Create directory
+        run: mkdir tmp 
+      
+      - name: Upload to mega
+        uses: Difegue/action-megacmd@master
+        with:
+          args: put tmp Test
+        env:
+          USERNAME: ${{ secrets.MEGA_USERNAME }}
+          PASSWORD: ${{ secrets.MEGA_PASSWORD }}
