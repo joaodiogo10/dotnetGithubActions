@@ -20,6 +20,9 @@ jobs:
     #  run: |
     #    msbuild.exe GithubActionsDemo.sln -t:rebuild -p:Configuration=Release -p:platform="x64"
 
+    - name: Make dir
+      run: mkdir /tmp
+       
     - name: Make upload file
       run: echo "test" > /tmp/tmp.txt
 
