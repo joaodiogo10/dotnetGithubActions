@@ -12,9 +12,9 @@ jobs:
       run: mkdir tmp 
 
     - name: Upload to mega
-    uses: Difegue/action-megacmd@master
-    with:
+      uses: Difegue/action-megacmd@master
+      with:
         args: put tmp Test
-    env:
+      env:
         USERNAME: ${{ secrets.MEGA_USERNAME }}
         PASSWORD: ${{ secrets.MEGA_PASSWORD }}
