@@ -2,6 +2,7 @@ name: Deploy
 
 on:
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +16,31 @@ jobs:
     - name: Restore Packages
       run: nuget restore GithubActionsDemo.sln
 
-    - name: Build Solution
-      run: |
-        msbuild.exe GithubActionsDemo.sln -t:rebuild -p:Configuration=Release -p:platform="x64"
+    #- name: Build Solution
+    #  run: |
+    #    msbuild.exe GithubActionsDemo.sln -t:rebuild -p:Configuration=Release -p:platform="x64"
+
+    - name: Make tmp dir
+      run: mkdir /tmp
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: /tmp
+
+  upload:
+    runs-on: windows-2019
+
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my-artifact
+      
+      - name: Upload to mega
+        uses: Difegue/action-megacmd@master
+        with:
+          args: put tmp Test
+        env:
+          USERNAME: ${{ secrets.MEGA_USERNAME }}
+          PASSWORD: ${{ secrets.MEGA_PASSWORD }}
