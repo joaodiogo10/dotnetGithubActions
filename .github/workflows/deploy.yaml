@@ -22,6 +22,9 @@ jobs:
 
     - name: Make tmp dir
       run: mkdir /tmp
+    
+    - name: Make upload file
+      run: touch tmp.txt
 
     - uses: actions/upload-artifact@v3
       with:
@@ -41,7 +44,7 @@ jobs:
       - name: Upload to mega
         uses: Difegue/action-megacmd@master
         with:
-          args: put tmp Test
+          args: put tmp.txt Test
         env:
           USERNAME: ${{ secrets.MEGA_USERNAME }}
           PASSWORD: ${{ secrets.MEGA_PASSWORD }}
