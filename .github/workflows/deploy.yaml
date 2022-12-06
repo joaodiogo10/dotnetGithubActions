@@ -42,7 +42,7 @@ jobs:
       - name: Upload to mega
         uses: Difegue/action-megacmd@master
         with:
-          args: put tmp.txt Test
+          args: put Output.zip Test
         env:
           USERNAME: ${{ secrets.MEGA_USERNAME }}
           PASSWORD: ${{ secrets.MEGA_PASSWORD }}
