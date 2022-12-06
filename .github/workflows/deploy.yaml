@@ -16,20 +16,18 @@ jobs:
     - name: Restore Packages
       run: nuget restore GithubActionsDemo.sln
 
-    #- name: Build Solution
-    #  run: |
-    #    msbuild.exe GithubActionsDemo.sln -t:rebuild -p:Configuration=Release -p:platform="x64"
+    - name: Build Solution
+      run: |
+        msbuild.exe GithubActionsDemo.sln -t:rebuild -p:Configuration=Release -p:platform="x64" -p:OutDir=C:\Output
+    
+    - name: Zip build output 
+      run: tar.exe -cf C:\Output.zip C:\Output
 
-    - name: Make dir
-      run: mkdir /tmp
-       
-    - name: Make upload file
-      run: echo "test" > /tmp/tmp.txt
 
     - uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: /tmp
+        path: C:\Output.zip
 
   upload:
     runs-on: ubuntu-latest
