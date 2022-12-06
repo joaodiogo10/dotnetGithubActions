@@ -1,8 +1,6 @@
 name: Deploy
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -21,4 +19,4 @@ jobs:
 
     - name: Build Solution
       run: |
-        msbuild.exe GithubActionsDemo.sln  -t:rebuild -p:Configuration=Release -p:platform="x64"
+        msbuild.exe GithubActionsDemo.sln -t:rebuild -p:Configuration=Release -p:platform="x64"

@@ -1,0 +1,19 @@
+- name: Upload
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  upload:
+    - name: Create directory
+      run: mkdir tmp 
+
+    uses: Difegue/action-megacmd@master
+    with:
+        args: put tmp Test
+    env:
+        USERNAME: ${{ secrets.MEGA_USERNAME }}
+        PASSWORD: ${{ secrets.MEGA_PASSWORD }}
