@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
         path: /tmp
 
   upload:
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download a single artifact
